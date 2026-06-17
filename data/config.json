@@ -1,0 +1,20 @@
+{
+  "server": {
+    "name": "Puglia RP",
+    "code": "gm7ja8ct",
+    "status": "ONLINE",
+    "moderation": "Garantita"
+  },
+  "ssu_log": [
+    {
+      "user": "gabbel1385",
+      "userId": "1085192959173087324",
+      "timestamp": "2026-06-17T17:16:17.388Z"
+    },
+    {
+      "user": "criss_120",
+      "userId": "1335193975296102432",
+      "timestamp": "2026-06-17T18:30:13.434Z"
+    }
+  ]
+}

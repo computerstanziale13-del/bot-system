@@ -1,0 +1,36 @@
+{
+  "counter": 3,
+  "tickets": [
+    {
+      "id": "0001",
+      "category": "ticket_partner",
+      "label": "Richiesta Partnership",
+      "userId": "1335193975296102432",
+      "userTag": "criss_120",
+      "channelId": "1516872436405112954",
+      "status": "open",
+      "createdAt": "2026-06-17T18:29:31.403Z"
+    },
+    {
+      "id": "0002",
+      "category": "ticket_segnalazione",
+      "label": "Segnalazione Utente",
+      "userId": "1335193975296102432",
+      "userTag": "criss_120",
+      "channelId": "1516875908722589787",
+      "status": "open",
+      "createdAt": "2026-06-17T18:43:19.258Z"
+    },
+    {
+      "id": "0003",
+      "category": "ticket_gradi",
+      "label": "Assistenza Gradi Alti",
+      "userId": "1335193975296102432",
+      "userTag": "criss_120",
+      "channelId": "1516880793618747677",
+      "status": "open",
+      "createdAt": "2026-06-17T19:02:44.212Z",
+      "claimedBy": null
+    }
+  ]
+}

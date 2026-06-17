@@ -1,0 +1,40 @@
+{
+  "sessions": [
+    {
+      "type": "start",
+      "userId": "1085192959173087324",
+      "userTag": "gabbel1385",
+      "timestamp": "2026-06-17T17:15:56.258Z"
+    },
+    {
+      "type": "end",
+      "userId": "1085192959173087324",
+      "userTag": "gabbel1385",
+      "timestamp": "2026-06-17T17:15:59.398Z"
+    },
+    {
+      "type": "start",
+      "userId": "1335193975296102432",
+      "userTag": "criss_120",
+      "timestamp": "2026-06-17T18:30:29.588Z"
+    },
+    {
+      "type": "end",
+      "userId": "1335193975296102432",
+      "userTag": "criss_120",
+      "timestamp": "2026-06-17T18:30:34.032Z"
+    },
+    {
+      "type": "start",
+      "userId": "1280122202594869270",
+      "userTag": "ideallizzare",
+      "timestamp": "2026-06-17T18:34:51.864Z"
+    },
+    {
+      "type": "end",
+      "userId": "1280122202594869270",
+      "userTag": "ideallizzare",
+      "timestamp": "2026-06-17T18:34:55.212Z"
+    }
+  ]
+}
