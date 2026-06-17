@@ -6,6 +6,7 @@ import {
   EmbedBuilder,
   PermissionFlagsBits,
   SlashCommandBuilder,
+  TextChannel,
 } from 'discord.js';
 
 export const data = new SlashCommandBuilder()
@@ -14,10 +15,16 @@ export const data = new SlashCommandBuilder()
   .setDefaultMemberPermissions(PermissionFlagsBits.Administrator);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
-  if (!interaction.channel || !interaction.channel.isTextBased()) {
+  // 1. Validazione sicura del canale
+  const channel = interaction.channel;
+  
+  if (!channel || !channel.isTextBased()) {
     await interaction.reply({ content: '❌ Comando utilizzabile solo in canali testuali.', ephemeral: true });
     return;
   }
+
+  // 2. Definizione del canale come TextChannel esplicito per TypeScript
+  const textChannel = channel as TextChannel;
 
   const embed = new EmbedBuilder()
     .setTitle('👮 Gestione Servizio Staff')
@@ -34,15 +41,14 @@ export async function execute(interaction: ChatInputCommandInteraction) {
     new ButtonBuilder()
       .setCustomId('start_staff')
       .setLabel('🟢 Inizia Servizio')
-      .setStyle(ButtonStyle.Success)
-      .setEmoji('🟢'),
+      .setStyle(ButtonStyle.Success),
     new ButtonBuilder()
       .setCustomId('end_staff')
       .setLabel('🔴 Finisci Servizio')
-      .setStyle(ButtonStyle.Danger)
-      .setEmoji('🔴'),
+      .setStyle(ButtonStyle.Danger),
   );
 
-  await interaction.channel.send({ embeds: [embed], components: [row] });
+  // 3. Uso di textChannel che ora è riconosciuto correttamente dal compilatore
+  await textChannel.send({ embeds: [embed], components: [row] });
   await interaction.reply({ content: '✅ Pannello staff inviato!', ephemeral: true });
 }
