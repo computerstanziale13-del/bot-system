@@ -7,17 +7,32 @@ import {
 import fs from 'fs';
 import path from 'path';
 
-const dataPath = path.join(__dirname, '../../data/config.json');
-const gifPath = path.join(__dirname, '../../assets/ssu.gif');
+// Utilizzo di process.cwd() per percorsi corretti nella root
+const dataPath = path.join(process.cwd(), 'data', 'config.json');
+const gifPath = path.join(process.cwd(), 'assets', 'ssu.gif');
 
 const PING_ROLE = '1502916988694040647';
 
-function loadConfig() {
+interface ServerConfig {
+  server: {
+    name: string;
+    code: string;
+    status: string;
+    moderation: string;
+  };
+  ssu_log?: { user: string; userId: string; timestamp: string }[];
+}
+
+function loadConfig(): ServerConfig {
+  if (!fs.existsSync(dataPath)) {
+      // Configurazione di fallback se il file manca
+      return { server: { name: 'Non impostato', code: 'N/A', status: 'Online', moderation: 'Attiva' }, ssu_log: [] };
+  }
   const raw = fs.readFileSync(dataPath, 'utf-8');
   return JSON.parse(raw);
 }
 
-function saveConfig(data: object) {
+function saveConfig(data: ServerConfig) {
   fs.writeFileSync(dataPath, JSON.stringify(data, null, 2), 'utf-8');
 }
 
@@ -37,14 +52,14 @@ export async function execute(interaction: ChatInputCommandInteraction) {
     .setImage('attachment://ssu.gif')
     .setDescription(
       `┌ **Stato**\n╰ **${status}**\n\n` +
-        `┌ **Moderazione**\n╰ **${moderation}**\n\n` +
-        `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
-        `**Nome server :** ${name}\n\n` +
-        `**Codice in Game :** ${code}\n\n` +
-        `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
-        `Il membro staff vi aspetta in Game !\n\n` +
-        `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
-        `┌ **Gestito da**\n╰ ${interaction.user}`,
+      `┌ **Moderazione**\n╰ **${moderation}**\n\n` +
+      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+      `**Nome server :** ${name}\n\n` +
+      `**Codice in Game :** ${code}\n\n` +
+      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+      `Il membro staff vi aspetta in Game !\n\n` +
+      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+      `┌ **Gestito da**\n╰ ${interaction.user}`
     );
 
   await interaction.reply({
@@ -53,6 +68,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
     files: [attachment],
   });
 
+  if (!config.ssu_log) config.ssu_log = [];
   config.ssu_log.push({
     user: interaction.user.tag,
     userId: interaction.user.id,
