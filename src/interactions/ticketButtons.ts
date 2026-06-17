@@ -99,7 +99,7 @@ export async function handleCloseTicket(interaction: ButtonInteraction) {
   await interaction.reply({ content: '❌ Ticket chiuso. Canale eliminato tra 5 secondi...' });
 
   setTimeout(async () => {
-    if (interaction.channel && interaction.channel.deletable) {
+    if (channel.permissionsFor(channel.guild.members.me!)?.has('ManageChannels')) {
       await interaction.channel.delete();
     }
   }, 5000);
